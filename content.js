@@ -10,6 +10,8 @@
     slideToSee: true,
     disableRecentPosts: true,
     disableLeftPanel: true,
+    disableRelatedCommunities: true,
+    disableSubredditSidebar: false,
     frictionEnabled: true,
     frictionDuration: 5,
     frictionTrigger: "home", // "home" | "post" | "all"
@@ -49,6 +51,14 @@
       "rd-detox-left-disabled",
       settings.disableLeftPanel
     );
+    document.body.classList.toggle(
+      "rd-detox-related-disabled",
+      settings.disableRelatedCommunities
+    );
+    document.body.classList.toggle(
+      "rd-detox-sub-sidebar-disabled",
+      settings.disableSubredditSidebar
+    );
   }
 
   // --- Helpers ---
@@ -68,6 +78,15 @@
 
   function isPostPage() {
     return /^\/r\/[^/]+\/comments\//.test(location.pathname);
+  }
+
+  function isSubredditPage() {
+    return /^\/r\/[^/]+\/?$/.test(location.pathname) ||
+      /^\/r\/[^/]+\/(hot|new|top|rising)\/?/.test(location.pathname);
+  }
+
+  function isFeedPage() {
+    return isHomePage() || isSubredditPage();
   }
 
   // --- Feature: Disable Promoted Posts ---
@@ -240,6 +259,7 @@
 
   function addSlideOverlays() {
     if (!settings.slideToSee) return;
+    if (!isFeedPage()) return;
 
     // Find all posts in the feed
     const posts = document.querySelectorAll(

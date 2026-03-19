@@ -75,6 +75,46 @@ body.rd-detox-left-disabled shreddit-app {
   --left-sidebar-width: 0px !important;
 }
 
+/* ===== DISABLE RELATED COMMUNITIES ===== */
+
+/* Hide "Related Communities" / "Similar Communities" widgets in subreddit sidebars */
+body.rd-detox-related-disabled [data-testid="related-communities"],
+body.rd-detox-related-disabled [data-testid="similar-communities"],
+body.rd-detox-related-disabled [aria-label="Related Communities"],
+body.rd-detox-related-disabled [aria-label="Similar Communities"],
+body.rd-detox-related-disabled shreddit-related-communities,
+body.rd-detox-related-disabled community-highlight-card {
+  display: none !important;
+}
+
+/* Target sidebar sections containing "related" or "similar" community links */
+body.rd-detox-related-disabled aside [class*="related"],
+body.rd-detox-related-disabled aside [class*="Related"],
+body.rd-detox-related-disabled #right-sidebar-container [class*="related"],
+body.rd-detox-related-disabled #right-sidebar-container [class*="Related"] {
+  display: none !important;
+}
+
+/* ===== DISABLE SUBREDDIT SIDEBAR (rules, wiki, etc.) ===== */
+
+/* Hide the subreddit info/rules sidebar on subreddit pages */
+body.rd-detox-sub-sidebar-disabled aside[aria-label*="community"],
+body.rd-detox-sub-sidebar-disabled aside[aria-label*="Community"],
+body.rd-detox-sub-sidebar-disabled [data-testid="subreddit-sidebar"],
+body.rd-detox-sub-sidebar-disabled shreddit-subreddit-header ~ aside {
+  display: none !important;
+}
+
+/* Hide the entire right sidebar on subreddit pages when this is enabled */
+body.rd-detox-sub-sidebar-disabled #right-sidebar-container {
+  display: none !important;
+}
+
+/* Expand main content when subreddit sidebar is hidden */
+body.rd-detox-sub-sidebar-disabled main {
+  max-width: 100% !important;
+}
+
 /* ===== SLIDE TO SEE POST OVERLAY ===== */
 
 .rd-detox-slide-overlay {

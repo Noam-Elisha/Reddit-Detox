@@ -6,6 +6,8 @@ const TOGGLE_KEYS = [
   "slideToSee",
   "disableRecentPosts",
   "disableLeftPanel",
+  "disableRelatedCommunities",
+  "disableSubredditSidebar",
   "frictionEnabled",
 ];
 
@@ -15,6 +17,8 @@ const DEFAULT_SETTINGS = {
   slideToSee: true,
   disableRecentPosts: true,
   disableLeftPanel: true,
+  disableRelatedCommunities: true,
+  disableSubredditSidebar: false,
   frictionEnabled: true,
   frictionDuration: 5,
   frictionTrigger: "home",
