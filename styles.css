@@ -115,8 +115,7 @@ body.rd-detox-left-disabled shreddit-app {
 
 .rd-detox-slide-track {
   position: relative;
-  width: calc(100% - 32px);
-  max-width: 100%;
+  width: 75%;
   height: 44px;
   background: #272729;
   border-radius: 22px;
