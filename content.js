@@ -267,7 +267,6 @@
       overlay.className = "rd-detox-slide-overlay";
       overlay.innerHTML = `
         <div class="rd-detox-slide-content">
-          <div class="rd-detox-slide-icon">&#x1f6e1;</div>
           <div class="rd-detox-slide-text">Slide to reveal</div>
         </div>
         <div class="rd-detox-slide-track">
