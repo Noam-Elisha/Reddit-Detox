@@ -277,6 +277,9 @@
       // Skip if it's an ad element
       if (post.tagName.toLowerCase() === "shreddit-ad-post") return;
 
+      // Skip posts that are display:none (removed by other features)
+      if (post.style.display === "none" || post.offsetParent === null) return;
+
       post.dataset.rdDetoxSlide = "true";
 
       // Find or create a suitable container
@@ -667,9 +670,11 @@
 
   function runAllFeatures() {
     applyBodyClasses();
+    // Remove unwanted posts first, then add overlays to surviving posts
     removePromotedPosts();
     removeRecommendedPosts();
-    addSlideOverlays();
+    // Defer slide overlays to next microtask so DOM removals are fully applied
+    Promise.resolve().then(() => addSlideOverlays());
   }
 
   function scheduleRun() {
