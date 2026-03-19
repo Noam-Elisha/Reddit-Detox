@@ -287,15 +287,18 @@
 
   function setupSlideInteraction(overlay, container) {
     const thumb = overlay.querySelector(".rd-detox-slide-thumb");
+    const track = overlay.querySelector(".rd-detox-slide-track");
     const label = overlay.querySelector(".rd-detox-slide-label");
-    if (!thumb) return;
+    if (!thumb || !track) return;
 
     let dragging = false;
     let startX = 0;
     let currentOffset = 0;
-    const trackWidth = 260;
     const thumbWidth = 44;
-    const maxOffset = trackWidth - thumbWidth;
+
+    function getMaxOffset() {
+      return track.offsetWidth - thumbWidth;
+    }
 
     function onStart(e) {
       dragging = true;
@@ -310,6 +313,7 @@
       if (!dragging) return;
       e.preventDefault();
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const maxOffset = getMaxOffset();
       let offset = clientX - startX;
       offset = Math.max(0, Math.min(maxOffset, offset));
       currentOffset = offset;
@@ -321,6 +325,7 @@
       dragging = false;
       thumb.classList.remove("rd-detox-slide-thumb-active");
 
+      const maxOffset = getMaxOffset();
       if (currentOffset >= maxOffset - 5) {
         // Success — reveal post
         overlay.classList.add("rd-detox-slide-fade-out");
