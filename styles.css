@@ -79,21 +79,17 @@ body.rd-detox-left-disabled shreddit-app {
 
 /* ===== DISABLE RELATED COMMUNITIES ===== */
 
-/* Hide "Related Communities" / "Similar Communities" widgets in subreddit sidebars */
-body.rd-detox-related-disabled [data-testid="related-communities"],
-body.rd-detox-related-disabled [data-testid="similar-communities"],
-body.rd-detox-related-disabled [aria-label="Related Communities"],
-body.rd-detox-related-disabled [aria-label="Similar Communities"],
-body.rd-detox-related-disabled shreddit-related-communities,
-body.rd-detox-related-disabled community-highlight-card {
+/* Hide in-feed community recommendations */
+body.rd-detox-related-disabled in-feed-community-recommendations {
   display: none !important;
 }
 
-/* Target sidebar sections containing "related" or "similar" community links */
-body.rd-detox-related-disabled aside [class*="related"],
-body.rd-detox-related-disabled aside [class*="Related"],
-body.rd-detox-related-disabled #right-sidebar-container [class*="related"],
-body.rd-detox-related-disabled #right-sidebar-container [class*="Related"] {
+/* Hide sidebar related/similar community widgets */
+body.rd-detox-related-disabled [data-testid="related-communities"],
+body.rd-detox-related-disabled [data-testid="similar-communities"],
+body.rd-detox-related-disabled shreddit-related-communities,
+body.rd-detox-related-disabled community-highlight-card,
+body.rd-detox-related-disabled community-recommendation {
   display: none !important;
 }
 
