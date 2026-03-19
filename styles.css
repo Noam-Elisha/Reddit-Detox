@@ -24,33 +24,25 @@ body.rd-detox-promoted-disabled .sponsored-tagline {
   display: none !important;
 }
 
-/* ===== DISABLE RECENT POSTS (right sidebar) ===== */
+/* ===== DISABLE RIGHT SIDEBAR ===== */
 
-/* New Reddit (shreddit) - hide recent posts widget */
+/* Hide the entire right sidebar container (shreddit) */
+body.rd-detox-recent-disabled #right-sidebar-container,
+body.rd-detox-recent-disabled .right-sidebar {
+  display: none !important;
+}
+
+/* Also target recent-posts element specifically */
+body.rd-detox-recent-disabled recent-posts,
 body.rd-detox-recent-disabled [data-testid="recent-posts"],
-body.rd-detox-recent-disabled [data-testid="recently-visited-communities"],
-body.rd-detox-recent-disabled .recent-posts-container {
+body.rd-detox-recent-disabled [data-testid="recently-visited-communities"] {
   display: none !important;
 }
 
-/* Hide "Recent Posts" titled sidebar sections */
-body.rd-detox-recent-disabled aside h2:has(+ * > [href*="recent"]),
-body.rd-detox-recent-disabled [aria-label="Recent Posts"],
-body.rd-detox-recent-disabled pdp-right-rail-recent-posts {
-  display: none !important;
-}
-
-/* Target the right sidebar widgets containing recent/trending content */
-body.rd-detox-recent-disabled #right-sidebar-container [class*="recent"],
-body.rd-detox-recent-disabled #right-sidebar-container [class*="Recent"],
-body.rd-detox-recent-disabled aside [class*="recent"],
-body.rd-detox-recent-disabled aside [class*="Recent"] {
-  display: none !important;
-}
-
-/* New Reddit sidebar widget for recent posts */
-body.rd-detox-recent-disabled .sidebar-grid aside > div:has([href*="/comments/"]) {
-  display: none !important;
+/* Expand main content when right sidebar is hidden */
+body.rd-detox-recent-disabled main,
+body.rd-detox-recent-disabled .main-container {
+  max-width: 100% !important;
 }
 
 /* ===== DISABLE LEFT PANEL ===== */
