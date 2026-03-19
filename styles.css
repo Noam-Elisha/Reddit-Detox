@@ -24,15 +24,17 @@ body.rd-detox-promoted-disabled .sponsored-tagline {
   display: none !important;
 }
 
-/* ===== DISABLE RIGHT SIDEBAR ===== */
+/* ===== DISABLE RIGHT SIDEBAR (home/non-subreddit pages only) ===== */
 
-/* Hide the entire right sidebar container (shreddit) */
-body.rd-detox-recent-disabled #right-sidebar-container,
-body.rd-detox-recent-disabled .right-sidebar {
+/* Hide the entire right sidebar on home and non-subreddit pages */
+body.rd-detox-recent-disabled.rd-detox-on-home #right-sidebar-container,
+body.rd-detox-recent-disabled.rd-detox-on-home .right-sidebar,
+body.rd-detox-recent-disabled.rd-detox-on-post #right-sidebar-container,
+body.rd-detox-recent-disabled.rd-detox-on-post .right-sidebar {
   display: none !important;
 }
 
-/* Also target recent-posts element specifically */
+/* Also target recent-posts element on any page */
 body.rd-detox-recent-disabled recent-posts,
 body.rd-detox-recent-disabled [data-testid="recent-posts"],
 body.rd-detox-recent-disabled [data-testid="recently-visited-communities"] {
@@ -40,8 +42,8 @@ body.rd-detox-recent-disabled [data-testid="recently-visited-communities"] {
 }
 
 /* Expand main content when right sidebar is hidden */
-body.rd-detox-recent-disabled main,
-body.rd-detox-recent-disabled .main-container {
+body.rd-detox-recent-disabled.rd-detox-on-home main,
+body.rd-detox-recent-disabled.rd-detox-on-post main {
   max-width: 100% !important;
 }
 
@@ -95,23 +97,16 @@ body.rd-detox-related-disabled #right-sidebar-container [class*="Related"] {
   display: none !important;
 }
 
-/* ===== DISABLE SUBREDDIT SIDEBAR (rules, wiki, etc.) ===== */
-
-/* Hide the subreddit info/rules sidebar on subreddit pages */
-body.rd-detox-sub-sidebar-disabled aside[aria-label*="community"],
-body.rd-detox-sub-sidebar-disabled aside[aria-label*="Community"],
-body.rd-detox-sub-sidebar-disabled [data-testid="subreddit-sidebar"],
-body.rd-detox-sub-sidebar-disabled shreddit-subreddit-header ~ aside {
-  display: none !important;
-}
+/* ===== DISABLE SUBREDDIT SIDEBAR (rules, wiki, etc. — subreddit pages only) ===== */
 
 /* Hide the entire right sidebar on subreddit pages when this is enabled */
-body.rd-detox-sub-sidebar-disabled #right-sidebar-container {
+body.rd-detox-sub-sidebar-disabled.rd-detox-on-subreddit #right-sidebar-container,
+body.rd-detox-sub-sidebar-disabled.rd-detox-on-subreddit .right-sidebar {
   display: none !important;
 }
 
 /* Expand main content when subreddit sidebar is hidden */
-body.rd-detox-sub-sidebar-disabled main {
+body.rd-detox-sub-sidebar-disabled.rd-detox-on-subreddit main {
   max-width: 100% !important;
 }
 

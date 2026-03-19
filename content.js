@@ -59,6 +59,10 @@
       "rd-detox-sub-sidebar-disabled",
       settings.disableSubredditSidebar
     );
+    // Page context classes for scoped CSS
+    document.body.classList.toggle("rd-detox-on-home", isHomePage());
+    document.body.classList.toggle("rd-detox-on-subreddit", isSubredditPage());
+    document.body.classList.toggle("rd-detox-on-post", isPostPage());
   }
 
   // --- Helpers ---
