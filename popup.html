@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 320px;
+      font-family: 'Segoe UI', 'Roboto', sans-serif;
+      background: #1A1A1B;
+      color: #D7DADC;
+      padding: 0;
+    }
+
+    .header {
+      padding: 16px 20px;
+      border-bottom: 1px solid #343536;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header h1 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #D7DADC;
+    }
+
+    .header .logo {
+      font-size: 22px;
+    }
+
+    .settings {
+      padding: 8px 0;
+    }
+
+    .setting-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .setting-item:hover {
+      background: #272729;
+    }
+
+    .setting-label {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex: 1;
+      margin-right: 12px;
+    }
+
+    .setting-name {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .setting-desc {
+      font-size: 11px;
+      color: #818384;
+      line-height: 1.3;
+    }
+
+    /* Toggle switch */
+    .toggle {
+      position: relative;
+      width: 40px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      inset: 0;
+      background: #555;
+      border-radius: 11px;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      left: 3px;
+      top: 3px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.2s;
+    }
+
+    .toggle input:checked + .toggle-slider {
+      background: #FF4500;
+    }
+
+    .toggle input:checked + .toggle-slider::before {
+      transform: translateX(18px);
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 1px solid #343536;
+      margin: 4px 20px;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #818384;
+      padding: 10px 20px 2px;
+    }
+
+    .friction-options {
+      padding: 0 20px 8px;
+      display: none;
+    }
+
+    .friction-options.visible {
+      display: block;
+    }
+
+    .friction-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+    }
+
+    .friction-row-label {
+      font-size: 12px;
+      color: #818384;
+    }
+
+    .friction-row select,
+    .friction-row input[type="number"] {
+      background: #272729;
+      border: 1px solid #343536;
+      color: #D7DADC;
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 12px;
+      outline: none;
+    }
+
+    .friction-row select {
+      width: 130px;
+    }
+
+    .friction-row input[type="number"] {
+      width: 70px;
+      text-align: center;
+    }
+
+    .friction-row select:focus,
+    .friction-row input[type="number"]:focus {
+      border-color: #FF4500;
+    }
+
+    .footer {
+      padding: 12px 20px;
+      border-top: 1px solid #343536;
+      text-align: center;
+      font-size: 11px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <span class="logo">&#x1f6e1;</span>
+    <h1>Reddit Detox</h1>
+  </div>
+
+  <div class="settings">
+    <label class="setting-item">
+      <div class="setting-label">
+        <span class="setting-name">Disable Recommendations</span>
+        <span class="setting-desc">Hide posts from subreddits you're not subscribed to</span>
+      </div>
+      <div class="toggle">
+        <input type="checkbox" id="disableRecommendations">
+        <span class="toggle-slider"></span>
+      </div>
+    </label>
+
+    <label class="setting-item">
+      <div class="setting-label">
+        <span class="setting-name">Disable Promoted Posts</span>
+        <span class="setting-desc">Remove all promoted and sponsored posts</span>
+      </div>
+      <div class="toggle">
+        <input type="checkbox" id="disablePromoted">
+        <span class="toggle-slider"></span>
+      </div>
+    </label>
+
+    <label class="setting-item">
+      <div class="setting-label">
+        <span class="setting-name">Slide to See Post</span>
+        <span class="setting-desc">Posts are hidden until you slide to reveal them</span>
+      </div>
+      <div class="toggle">
+        <input type="checkbox" id="slideToSee">
+        <span class="toggle-slider"></span>
+      </div>
+    </label>
+
+    <label class="setting-item">
+      <div class="setting-label">
+        <span class="setting-name">Disable Recent Posts</span>
+        <span class="setting-desc">Remove the "Recent Posts" section from the sidebar</span>
+      </div>
+      <div class="toggle">
+        <input type="checkbox" id="disableRecentPosts">
+        <span class="toggle-slider"></span>
+      </div>
+    </label>
+
+    <label class="setting-item">
+      <div class="setting-label">
+        <span class="setting-name">Disable Left Panel</span>
+        <span class="setting-desc">Remove the left navigation sidebar completely</span>
+      </div>
+      <div class="toggle">
+        <input type="checkbox" id="disableLeftPanel">
+        <span class="toggle-slider"></span>
+      </div>
+    </label>
+
+    <hr class="section-divider">
+    <div class="section-title">Friction</div>
+
+    <label class="setting-item">
+      <div class="setting-label">
+        <span class="setting-name">Add Friction</span>
+        <span class="setting-desc">Show a delay overlay before Reddit loads</span>
+      </div>
+      <div class="toggle">
+        <input type="checkbox" id="frictionEnabled">
+        <span class="toggle-slider"></span>
+      </div>
+    </label>
+
+    <div class="friction-options" id="frictionOptions">
+      <div class="friction-row">
+        <span class="friction-row-label">Delay (seconds)</span>
+        <input type="number" id="frictionDuration" min="1" max="60" value="5">
+      </div>
+      <div class="friction-row">
+        <span class="friction-row-label">Show on</span>
+        <select id="frictionTrigger">
+          <option value="home">Home page only</option>
+          <option value="post">Post pages only</option>
+          <option value="all">All pages</option>
+        </select>
+      </div>
+      <div class="friction-row">
+        <span class="friction-row-label">Require CAPTCHA</span>
+        <label class="toggle toggle-small">
+          <input type="checkbox" id="frictionCaptcha">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Changes apply instantly on open Reddit tabs
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

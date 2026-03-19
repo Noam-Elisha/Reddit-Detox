@@ -1,0 +1,334 @@
+/* Reddit Detox - CSS Rules
+   Instant hiding before JS runs, preventing flash of unwanted content.
+   JS adds/removes body classes based on user settings. */
+
+/* ===== DISABLE PROMOTED POSTS ===== */
+
+/* Hide shreddit ad post components */
+body.rd-detox-promoted-disabled shreddit-ad-post {
+  display: none !important;
+}
+
+/* Hide promoted post containers in various Reddit layouts */
+body.rd-detox-promoted-disabled [data-testid="promoted-post"],
+body.rd-detox-promoted-disabled .promotedlink,
+body.rd-detox-promoted-disabled [data-promoted="true"],
+body.rd-detox-promoted-disabled .ad-container,
+body.rd-detox-promoted-disabled [data-testid="ad-slot"] {
+  display: none !important;
+}
+
+/* Old Reddit promoted links */
+body.rd-detox-promoted-disabled .link.promotedlink,
+body.rd-detox-promoted-disabled .sponsored-tagline {
+  display: none !important;
+}
+
+/* ===== DISABLE RECENT POSTS (right sidebar) ===== */
+
+/* New Reddit (shreddit) - hide recent posts widget */
+body.rd-detox-recent-disabled [data-testid="recent-posts"],
+body.rd-detox-recent-disabled [data-testid="recently-visited-communities"],
+body.rd-detox-recent-disabled .recent-posts-container {
+  display: none !important;
+}
+
+/* Hide "Recent Posts" titled sidebar sections */
+body.rd-detox-recent-disabled aside h2:has(+ * > [href*="recent"]),
+body.rd-detox-recent-disabled [aria-label="Recent Posts"],
+body.rd-detox-recent-disabled pdp-right-rail-recent-posts {
+  display: none !important;
+}
+
+/* Target the right sidebar widgets containing recent/trending content */
+body.rd-detox-recent-disabled #right-sidebar-container [class*="recent"],
+body.rd-detox-recent-disabled #right-sidebar-container [class*="Recent"],
+body.rd-detox-recent-disabled aside [class*="recent"],
+body.rd-detox-recent-disabled aside [class*="Recent"] {
+  display: none !important;
+}
+
+/* New Reddit sidebar widget for recent posts */
+body.rd-detox-recent-disabled .sidebar-grid aside > div:has([href*="/comments/"]) {
+  display: none !important;
+}
+
+/* ===== DISABLE LEFT PANEL ===== */
+
+/* New Reddit (shreddit) left sidebar */
+body.rd-detox-left-disabled reddit-sidebar-nav,
+body.rd-detox-left-disabled #left-sidebar,
+body.rd-detox-left-disabled [data-testid="left-sidebar"],
+body.rd-detox-left-disabled left-sidebar-container,
+body.rd-detox-left-disabled .left-sidebar,
+body.rd-detox-left-disabled #left-sidebar-container {
+  display: none !important;
+}
+
+/* Old Reddit sidebar */
+body.rd-detox-left-disabled .listing-chooser,
+body.rd-detox-left-disabled .side {
+  display: none !important;
+}
+
+/* Expand main content when left panel is hidden */
+body.rd-detox-left-disabled .main-container,
+body.rd-detox-left-disabled [class*="ListingLayout"] {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+/* Shreddit layout - remove left sidebar spacing */
+body.rd-detox-left-disabled shreddit-app {
+  --left-sidebar-width: 0px !important;
+}
+
+/* ===== SLIDE TO SEE POST OVERLAY ===== */
+
+.rd-detox-slide-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: rgba(26, 26, 27, 0.97);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: inherit;
+  transition: opacity 0.3s ease-out;
+}
+
+.rd-detox-slide-overlay.rd-detox-slide-fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.rd-detox-slide-content {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.rd-detox-slide-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+  opacity: 0.6;
+}
+
+.rd-detox-slide-text {
+  font-size: 13px;
+  color: #818384;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.rd-detox-slide-track {
+  position: relative;
+  width: 260px;
+  height: 44px;
+  background: #272729;
+  border-radius: 22px;
+  border: 1px solid #343536;
+  overflow: hidden;
+  user-select: none;
+}
+
+.rd-detox-slide-thumb {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 44px;
+  height: 44px;
+  background: #FF4500;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  z-index: 2;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(255, 69, 0, 0.3);
+}
+
+.rd-detox-slide-thumb:hover {
+  background: #FF5722;
+  box-shadow: 0 2px 12px rgba(255, 69, 0, 0.5);
+}
+
+.rd-detox-slide-thumb-active {
+  cursor: grabbing !important;
+  background: #FF5722 !important;
+  box-shadow: 0 2px 16px rgba(255, 69, 0, 0.6) !important;
+}
+
+.rd-detox-slide-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #555;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  padding-left: 20px;
+  letter-spacing: 0.3px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ===== FRICTION OVERLAY ===== */
+
+#rd-detox-friction-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: #1A1A1B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.8s ease-out;
+}
+
+#rd-detox-friction-overlay.rd-detox-friction-fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.rd-detox-friction-content {
+  text-align: center;
+  color: #D7DADC;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  max-width: 400px;
+  padding: 40px;
+}
+
+.rd-detox-friction-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.rd-detox-friction-title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.rd-detox-friction-subtitle {
+  font-size: 16px;
+  color: #818384;
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+.rd-detox-friction-bar-track {
+  width: 100%;
+  height: 6px;
+  background: #343536;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.rd-detox-friction-bar-fill {
+  width: 0%;
+  height: 100%;
+  background: #FF4500;
+  border-radius: 3px;
+}
+
+.rd-detox-friction-time {
+  font-size: 14px;
+  color: #818384;
+}
+
+/* ===== SLIDER PUZZLE CAPTCHA ===== */
+
+.rd-detox-captcha-canvas-wrap {
+  position: relative;
+  width: 320px;
+  height: 180px;
+  margin: 0 auto 16px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+  user-select: none;
+}
+
+.rd-detox-captcha-canvas-wrap canvas {
+  display: block;
+}
+
+.rd-detox-captcha-slider-track {
+  position: relative;
+  width: 320px;
+  height: 44px;
+  margin: 0 auto;
+  background: #272729;
+  border-radius: 22px;
+  border: 1px solid #343536;
+  overflow: hidden;
+  user-select: none;
+}
+
+.rd-detox-captcha-slider-thumb {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 44px;
+  height: 44px;
+  background: #FF4500;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  z-index: 2;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(255, 69, 0, 0.3);
+}
+
+.rd-detox-captcha-slider-thumb:hover {
+  background: #FF5722;
+  box-shadow: 0 2px 12px rgba(255, 69, 0, 0.5);
+}
+
+.rd-detox-captcha-thumb-active {
+  cursor: grabbing !important;
+  background: #FF5722 !important;
+  box-shadow: 0 2px 16px rgba(255, 69, 0, 0.6) !important;
+}
+
+.rd-detox-captcha-slider-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #555;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  padding-left: 20px;
+  letter-spacing: 0.3px;
+}
+
+.rd-detox-captcha-status {
+  margin-top: 10px;
+  font-size: 14px;
+  min-height: 20px;
+  text-align: center;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+@keyframes rd-detox-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+}
+
+.rd-detox-captcha-shake {
+  animation: rd-detox-shake 0.4s ease !important;
+}
