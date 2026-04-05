@@ -90,7 +90,10 @@
   }
 
   function isFeedPage() {
-    return isHomePage() || isSubredditPage();
+    // Any page that isn't a single-post detail page is treated as a feed
+    // page. Covers home (/), /popular, /r/all, subreddit feeds, multireddits
+    // (/m/*), user profile feeds, etc. Pages without posts simply no-op.
+    return !isPostPage();
   }
 
   // --- Feature: Disable Promoted Posts ---
