@@ -278,7 +278,7 @@
       if (post.tagName.toLowerCase() === "shreddit-ad-post") return;
 
       // Skip posts that are display:none (removed by other features)
-      if (post.style.display === "none" || post.offsetParent === null) return;
+      if (post.style.display === "none") return;
 
       post.dataset.rdDetoxSlide = "true";
 
